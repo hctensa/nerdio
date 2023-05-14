@@ -2,7 +2,10 @@ import * as Native from 'react-native';
 
 const Style = Native.StyleSheet.create({
     Heading : {
-        fontSize: 30,
+        fontSize: 40,
+    },
+    Subheading: {
+        fontSize: 20,
     },
     Credits :{
         fontSize: 17,
@@ -51,11 +54,82 @@ const Style = Native.StyleSheet.create({
         fontSize: 16,
         textAlign: 'center',
     },
-    LevelButton: {
-
+    HandInButton:{
+        backgroundColor: '#8A2BE2', // Purple color
+        borderRadius: 25, // Round shape with radius
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        marginTop: 20,
+        marginBottom: -30,
+    },
+    HandInButtonText:{
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    LevelButtonView: {
+        flexDirection: 'row',
+    },
+    LevelButtonEasy: {
+        marginBottom: 50,
+        marginHorizontal: 10,
+        marginVertical: 10,
+        backgroundColor: 'green', // Purple color
+        borderRadius: 25, // Round shape with radius
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+    },
+    LevelButtonMedium: {
+        marginBottom: 50,
+        marginHorizontal: 10,
+        marginVertical: 10,
+        backgroundColor: 'orange', // Purple color
+        borderRadius: 25, // Round shape with radius
+        paddingVertical: 15,
+        paddingHorizontal: 20,
+    },
+    LevelButtonHard: {
+        marginBottom: 50,
+        marginHorizontal: 10,
+        marginVertical: 10,
+        backgroundColor: 'red', // Purple color
+        borderRadius: 25, // Round shape with radius
+        paddingVertical: 15,
+        paddingHorizontal: 20,
     },
     LevelButtonText: {
-
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    QuestionBackgroundImage: {
+        flex:1,
+        width:300,
+        height:290,
+        resizeMode: 'contain',
+        justifyContent: 'center',
+        alignItems: 'center',
+        zIndex:9,
+    },
+    ScoreCounter:{
+        fontSize:40,
+        color:'purple',
+    },
+    Countdown: {
+        fontSize: 20
+    },
+    Question:{
+        fontSize:25,
+        zIndex:10,
+        color: 'purple',
+    },
+    AnswerBox:{
+        backgroundColor: '#EDEDED',
+        marginTop: 30,
+        borderRadius: 10,
+        padding: 10,
+        fontSize: 16,
     }
 })
 
