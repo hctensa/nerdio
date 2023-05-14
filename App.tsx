@@ -1,11 +1,12 @@
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native';
+import * as React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import * as RN from 'react-native';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaView>
-    </SafeAreaView>
+    <NavigationContainer>
+      <RN.Text>Hello World!</RN.Text>
+    </NavigationContainer>
   );
 }
 
