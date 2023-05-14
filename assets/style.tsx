@@ -15,12 +15,12 @@ const Style = Native.StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
     },
-        middleView: {
+    middleView: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
-        bottomView: {
+    bottomView: {
         flex: 1,
         justifyContent: 'flex-end',
         alignItems: 'center',
