@@ -5,7 +5,13 @@ const Style = Native.StyleSheet.create({
         fontSize: 30,
     },
     Credits :{
-        fontSize: 15,
+        fontSize: 17,
+        fontWeight: 'bold',
+        margin:20,
+        color: 'purple',
+        textShadowColor: 'yellow',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 1,
     },
     Container : {
         flex:1,
@@ -25,6 +31,32 @@ const Style = Native.StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center',
     },
+    BackgroundImage: {
+        flex: 1,
+        resizeMode: 'cover',
+        justifyContent: 'center',
+    },
+    Logo: {
+        marginTop: 100,
+        width: 200,
+        resizeMode: 'contain',
+    },
+    PlayButton: {
+        backgroundColor: '#A134F6',
+        padding: 15,
+        borderRadius: 10,
+    },
+    PlayButtonText: {
+        color: 'white',
+        fontSize: 16,
+        textAlign: 'center',
+    },
+    LevelButton: {
+
+    },
+    LevelButtonText: {
+
+    }
 })
 
 export default Style;
