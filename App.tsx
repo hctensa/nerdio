@@ -16,7 +16,7 @@ function App(): JSX.Element {
   const HomeScreen = ({navigation}:any) => {
     return (
       <Native.View style={Style.Container}>
-        <Native.View style={Style.bottomView}>
+        <Native.View style={Style.BottomView}>
           <Native.Text style={Style.Credits}>App created by Edith-Samuel Sbenghe</Native.Text>
         </Native.View>
       </Native.View>
