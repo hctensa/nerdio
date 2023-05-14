@@ -6,18 +6,23 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 //IMPORTING NERDIO ASSETS
 import Style from './assets/style'
+const AppLogo = require('./assets/images/logo.png')
+const AppIcon = require('./assets/images/icon.png')
+const AppBackground = require('./assets/images/background.png')
 
 
 function App(): JSX.Element {
   // === SCREENS
-  const HomeScreen = () => {
+  const HomeScreen = ({navigation}:any) => {
     return (
-      <Native.View>
-        <Native.Text style={Style.Heading}>This is the home screen</Native.Text>
+      <Native.View style={Style.Container}>
+        <Native.View style={Style.bottomView}>
+          <Native.Text style={Style.Credits}>App created by Edith-Samuel Sbenghe</Native.Text>
+        </Native.View>
       </Native.View>
     )
   }
-  const GameScreen = () => {
+  const GameScreen = ({navigation}:any) => {
     return (
       <Native.View>
         <Native.Text>This is the game screen</Native.Text>
