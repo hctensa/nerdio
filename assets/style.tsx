@@ -72,30 +72,30 @@ const Style = Native.StyleSheet.create({
         flexDirection: 'row',
     },
     LevelButtonEasy: {
-        marginBottom: 50,
+        marginBottom: 20,
         marginHorizontal: 10,
         marginVertical: 10,
         backgroundColor: 'green', // Purple color
         borderRadius: 25, // Round shape with radius
-        paddingVertical: 15,
+        paddingVertical: 10,
         paddingHorizontal: 20,
     },
     LevelButtonMedium: {
-        marginBottom: 50,
+        marginBottom: 20,
         marginHorizontal: 10,
         marginVertical: 10,
         backgroundColor: 'orange', // Purple color
         borderRadius: 25, // Round shape with radius
-        paddingVertical: 15,
+        paddingVertical: 10,
         paddingHorizontal: 20,
     },
     LevelButtonHard: {
-        marginBottom: 50,
+        marginBottom: 20,
         marginHorizontal: 10,
         marginVertical: 10,
         backgroundColor: 'red', // Purple color
         borderRadius: 25, // Round shape with radius
-        paddingVertical: 15,
+        paddingVertical: 10,
         paddingHorizontal: 20,
     },
     LevelButtonText: {
@@ -105,8 +105,8 @@ const Style = Native.StyleSheet.create({
     },
     QuestionBackgroundImage: {
         flex:1,
-        width:300,
-        height:290,
+        width:280,
+        height:270,
         resizeMode: 'contain',
         justifyContent: 'center',
         alignItems: 'center',
@@ -130,7 +130,8 @@ const Style = Native.StyleSheet.create({
         borderRadius: 10,
         padding: 10,
         fontSize: 16,
-    }
+        alignItems: 'center',
+    },
 })
 
 export default Style;

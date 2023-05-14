@@ -13,11 +13,47 @@ const QuestionBackground = require('./assets/images/question_background.png');
 
 function App(): JSX.Element {
   // === GAME LOGIC
-  const [level0Score, setLevel0Score] = React.useState(1);
-  const [level1Score, setLevel1Score] = React.useState(1);
-  const [level2Score, setLevel2Score] = React.useState(1);
-  const [Difficulty, setDifficulty] = React.useState('Easy');
   const [activeLevelScore, setActiveLevelScore] = React.useState(1);
+  const [Difficulty, setDifficulty] = React.useState('Easy');
+  const [number1, setNumber1] = React.useState(1);
+  const [number2, setNumber2] = React.useState(1);
+  const [mathSymbol, setMathSymbol] = React.useState('+');
+  const [userAnswer, setUserAnswer] = React.useState(0);
+  const [correctAnswer, setCorrectAnswer] = React.useState(0);
+
+  React.useEffect(()=>{
+    if (activeLevelScore >= 11){
+      setActiveLevelScore(1);
+    }
+  }, [activeLevelScore])
+
+  const SwapDifficulty = (level:string) => {
+    setActiveLevelScore(1)
+    switch (Difficulty) {
+      case 'easy':
+        setDifficulty('easy');
+        break;
+      case 'medium':
+        setDifficulty('medium');
+        break;
+      case 'hard':
+        setDifficulty('hard');
+        break;
+      default:
+        break;
+    }
+  }
+
+  const ValidateAnswer = () => {
+    if(userAnswer === correctAnswer){
+      setActiveLevelScore(activeLevelScore+1)
+    }
+  }
+
+  const GenerateNewQuestion = (number1:number, number2:number, mathSymbol:string) => {
+    
+  }
+
   // === SCREENS
   const HomeScreen = ({navigation}:any) => {
     return (
@@ -50,10 +86,11 @@ function App(): JSX.Element {
           </Native.View>
           <Native.View style={Style.MiddleView}>
             <Native.ImageBackground source={QuestionBackground} style={Style.QuestionBackgroundImage}>
-              <Native.Text style={Style.Question}>What is 1 + 1?</Native.Text>
-              <Native.TextInput style={Style.AnswerBox} placeholder='Enter answer here...'/>
+              <Native.Text style={Style.Question}>What is {number1} {mathSymbol} {number2}?</Native.Text>
+              <Native.Text>{userAnswer}</Native.Text>
+              <Native.TextInput style={Style.AnswerBox} placeholder='Enter answer here...' keyboardType='numeric' value={String(userAnswer)} textAlign='center' onChangeText={(inputText) => setUserAnswer(Number(inputText))}/>
               <Native.TouchableOpacity style={Style.HandInButton}>
-                <Native.Text style={Style.HandInButtonText}>Hand In</Native.Text>
+                <Native.Text style={Style.HandInButtonText} onPress={ValidateAnswer}>Hand In</Native.Text>
               </Native.TouchableOpacity>
             </Native.ImageBackground>
           </Native.View>
@@ -63,13 +100,13 @@ function App(): JSX.Element {
             <Native.View style={Style.BottomView}>
               <Native.Text style={Style.Subheading}>Want to try a different difficulty?</Native.Text>
               <Native.View style={Style.LevelButtonView}>
-                <Native.TouchableOpacity style={Style.LevelButtonEasy}>
+                <Native.TouchableOpacity style={Style.LevelButtonEasy} onPress={() => SwapDifficulty('easy')}>
                   <Native.Text style={Style.LevelButtonText}>Easy</Native.Text>
                 </Native.TouchableOpacity>
-                <Native.TouchableOpacity style={Style.LevelButtonMedium}>
+                <Native.TouchableOpacity style={Style.LevelButtonMedium} onPress={() => SwapDifficulty('medium')}>
                   <Native.Text style={Style.LevelButtonText}>Medium</Native.Text>
                 </Native.TouchableOpacity>
-                <Native.TouchableOpacity style={Style.LevelButtonHard}>
+                <Native.TouchableOpacity style={Style.LevelButtonHard} onPress={() => SwapDifficulty('hard')}>
                   <Native.Text style={Style.LevelButtonText}>Hard</Native.Text>
                 </Native.TouchableOpacity>
               </Native.View>
@@ -82,7 +119,6 @@ function App(): JSX.Element {
 
   // === NAVIGATION
   const Stack = createNativeStackNavigator();
-
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown:false}}>
