@@ -132,6 +132,39 @@ const Style = Native.StyleSheet.create({
         fontSize: 16,
         alignItems: 'center',
     },
+    Answer:{
+        fontSize: 30,
+        marginTop: 20,
+    },
+    NumpadContainer: {
+        flex:0,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#A134F6'
+    },
+    NumpadTutorial: {
+        color: 'yellow',
+        fontSize: 23,
+        margin: 10
+    },
+    Numpad: {
+        backgroundColor: '#D5D716',
+        marginBottom:4,
+        marginHorizontal: 10,
+        borderRadius: 25, // Round shape with radius
+        paddingVertical: 10,
+        paddingHorizontal: 30,
+    },
+    NumpadText: {
+        color: 'purple',
+        fontSize: 30,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+    NumpadRow: {
+        flex:0,
+        flexDirection: 'row',
+    }
 })
 
 export default Style;

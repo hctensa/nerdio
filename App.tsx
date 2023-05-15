@@ -28,7 +28,8 @@ function App(): JSX.Element {
   }, [activeScore])
 
   const SwapDifficulty = (difficulty_internal:string) => {
-    setActiveScore(1)
+    setActiveScore(1);
+    GenerateNewQuestion();
     switch (difficulty_internal) {
       case 'easy': setDifficulty('easy'); break;
       case 'medium': setDifficulty('medium'); break;
@@ -37,11 +38,20 @@ function App(): JSX.Element {
     }
   }
 
+  const ProcessKeyPress = (KeyPressed:string) => {
+    switch (KeyPressed) {
+      case '0': if (userAnswer === 0){break} else {setUserAnswer(Number(String(userAnswer)+'0'))} break;
+      case 'C': setUserAnswer(Number(String(userAnswer).slice(0,-1))); break;
+      default: setUserAnswer(Number(String(userAnswer)+KeyPressed)); break;
+    }
+  }
+
   const ValidateAnswer = () => {
     if(userAnswer === correctAnswer){
       setActiveScore(activeScore+1)
     }
     GenerateNewQuestion()
+    setUserAnswer(0)
   }
 
   const GenerateNewQuestion = () => {
@@ -85,8 +95,9 @@ function App(): JSX.Element {
   }
 
   const GenerateDivisionQuestion = () => {
-    let localNumber1 = Math.floor(Math.random() * 12) + 1;
-    let localNumber2 = Math.ceil(Math.random() * (12 / localNumber1)) * localNumber1;
+    let localNumber1Options = [2,4,6,8,10,12];
+    let localNumber1 = localNumber1Options[Math.floor(Math.random() * 5)];
+    let localNumber2 = localNumber1/2;
     const localCorrectAnswer:number = localNumber1/localNumber2;
     setNumber1(localNumber1);
     setNumber2(localNumber2);
@@ -155,7 +166,7 @@ function App(): JSX.Element {
           <Native.View style={Style.MiddleView}>
             <Native.ImageBackground source={QuestionBackground} style={Style.QuestionBackgroundImage}>
               <Native.Text style={Style.Question}>What is {number1} {mathSymbol} {number2}?</Native.Text>
-              <Native.TextInput style={Style.AnswerBox} placeholder='Enter answer here...' keyboardType='numeric' value={String(userAnswer)} textAlign='center' onChangeText={(inputText) => setUserAnswer(Number(inputText))}/>
+                <Native.Text style={Style.Answer}>{userAnswer}</Native.Text>
               <Native.TouchableOpacity style={Style.HandInButton} onPress={ValidateAnswer}>
                 <Native.Text style={Style.HandInButtonText}>Hand In</Native.Text>
               </Native.TouchableOpacity>
@@ -180,6 +191,48 @@ function App(): JSX.Element {
             </Native.View>
           </Native.View>
         </Native.ImageBackground>
+        <Native.View style={Style.NumpadContainer}>
+          <Native.Text style={Style.NumpadTutorial}>Use keypad below to answer </Native.Text>
+          <Native.View style={Style.NumpadRow}>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('1')}>
+              <Native.Text style={Style.NumpadText}>1</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('2')}>
+              <Native.Text style={Style.NumpadText}>2</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('3')}>
+              <Native.Text style={Style.NumpadText}>3</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('4')}>
+              <Native.Text style={Style.NumpadText}>4</Native.Text>
+            </Native.TouchableOpacity>
+          </Native.View>
+          <Native.View style={Style.NumpadRow}>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('5')}>
+              <Native.Text style={Style.NumpadText}>5</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('6')}>
+              <Native.Text style={Style.NumpadText}>6</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('7')}>
+              <Native.Text style={Style.NumpadText}>7</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('8')}>
+              <Native.Text style={Style.NumpadText}>8</Native.Text>
+            </Native.TouchableOpacity>
+          </Native.View>
+          <Native.View style={Style.NumpadRow}>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('9')}>
+              <Native.Text style={Style.NumpadText}>9</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('0')}>
+              <Native.Text style={Style.NumpadText}>0</Native.Text>
+            </Native.TouchableOpacity>
+            <Native.TouchableOpacity style={Style.Numpad} onPress={()=>ProcessKeyPress('C')}>
+              <Native.Text style={Style.NumpadText}>←</Native.Text>
+            </Native.TouchableOpacity>
+          </Native.View>
+        </Native.View>
       </Native.View>
     );
   }
