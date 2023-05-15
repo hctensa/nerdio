@@ -93,6 +93,12 @@ function App(): JSX.Element {
     if(userAnswer === correctAnswer){
       setActiveScore(activeScore+1)
     }
+    switch (Difficulty) {
+      case 'Easy': setTimer(0); break;
+      case 'Medium': setTimer(20); break;
+      case 'Hard': setTimer(10); break;
+      default: break;
+    }
     GenerateNewQuestion()
     setUserAnswer(0)
   }
