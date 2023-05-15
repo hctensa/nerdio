@@ -20,6 +20,8 @@ function App(): JSX.Element {
   const [mathSymbol, setMathSymbol] = React.useState('+');
   const [userAnswer, setUserAnswer] = React.useState(0);
   const [correctAnswer, setCorrectAnswer] = React.useState(0);
+  const [countdownDuration, setCountdownDuration] = React.useState(0);
+  const [timer, setTimer] = React.useState(countdownDuration);
 
   React.useEffect(()=>{
     if (activeScore >= 11){
@@ -27,13 +29,54 @@ function App(): JSX.Element {
     }
   }, [activeScore])
 
+  // TIMER
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  React.useEffect(() => {
+    if (timer <= 0) {
+      switch (Difficulty) {
+        case 'Easy': break;
+        case 'Medium': setCountdownDuration(20);
+        case 'Hard': setCountdownDuration(10);
+        default: break;
+      }
+      setTimer(countdownDuration)
+      if(Difficulty !== 'Easy'){
+        GenerateNewQuestion()
+      }
+    }
+  }, [timer]);
+
+  const formatTime = (time:any) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    return `${formattedSeconds}`;
+  };
+
+  // DIFFICULTY
   const SwapDifficulty = (difficulty_internal:string) => {
     setActiveScore(1);
     GenerateNewQuestion();
     switch (difficulty_internal) {
-      case 'easy': setDifficulty('easy'); break;
-      case 'medium': setDifficulty('medium'); break;
-      case 'hard': setDifficulty('hard'); break;
+      case 'easy': setDifficulty('Easy'); break;
+      case 'medium': setDifficulty('Medium'); break;
+      case 'hard': setDifficulty('Hard'); break;
+      default: break;
+    }
+    switch (Difficulty) {
+      case 'Easy': setTimer(0); break;
+      case 'Medium': setTimer(20); break;
+      case 'Hard': setTimer(10); break;
       default: break;
     }
   }
@@ -160,7 +203,7 @@ function App(): JSX.Element {
           <Native.View style={Style.TopView}>
             <Native.View style={Style.MiddleView}>
               <Native.Text style={Style.ScoreCounter}>Question {activeScore}/10</Native.Text>
-              <Native.Text style={Style.Countdown}>Time Left: 0 Seconds</Native.Text>
+              <Native.Text style={Style.Countdown}>Time Left: {formatTime(timer)} Seconds</Native.Text>
             </Native.View>
           </Native.View>
           <Native.View style={Style.MiddleView}>
