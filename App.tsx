@@ -1,6 +1,7 @@
 // IMPORTING ALL LIBRARIES
 import * as React from 'react';
 import * as Native from 'react-native';
+import Sound from 'react-native-sound';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -9,6 +10,8 @@ import Style from './assets/style';
 const AppLogo = require('./assets/images/logo.png');
 const AppHomeBackground = require('./assets/images/home_background.png');
 const QuestionBackground = require('./assets/images/question_background.png');
+const deleteSoundSource = require('./assets/sounds/sfx_delete.mp3');
+const keySoundSource = require('./assets/sounds/sfx_key.mp3');
 
 
 function App(): JSX.Element {
@@ -28,7 +31,38 @@ function App(): JSX.Element {
       setActiveScore(1);
     }
   }, [activeScore])
-
+  // MUSIC
+  Sound.setCategory('Playback');
+  var DeleteSFX = new Sound(deleteSoundSource, Sound.MAIN_BUNDLE, (error) => {
+    if (error) {
+      console.log('failed to load the sound', error);
+      return;
+    }
+  
+    // Play the sound with an onEnd callback
+    DeleteSFX.play((success:any) => {
+      if (success) {
+        console.log('successfully finished playing');
+      } else {
+        console.log('playback failed due to audio decoding errors');
+      }
+    });
+  });
+  var KeySFX = new Sound(keySoundSource, Sound.MAIN_BUNDLE, (error) => {
+    if (error) {
+      console.log('failed to load the sound', error);
+      return;
+    }
+  
+    // Play the sound with an onEnd callback
+    KeySFX.play((success:any) => {
+      if (success) {
+        console.log('successfully finished playing');
+      } else {
+        console.log('playback failed due to audio decoding errors');
+      }
+    });
+  });
   // TIMER
   React.useEffect(() => {
     const interval = setInterval(() => {
@@ -83,9 +117,9 @@ function App(): JSX.Element {
 
   const ProcessKeyPress = (KeyPressed:string) => {
     switch (KeyPressed) {
-      case '0': if (userAnswer === 0){break} else {setUserAnswer(Number(String(userAnswer)+'0'))} break;
-      case 'C': setUserAnswer(Number(String(userAnswer).slice(0,-1))); break;
-      default: setUserAnswer(Number(String(userAnswer)+KeyPressed)); break;
+      case '0': KeySFX.play(); if (userAnswer === 0){break} else {setUserAnswer(Number(String(userAnswer)+'0'))} break;
+      case 'C': DeleteSFX.play(); setUserAnswer(Number(String(userAnswer).slice(0,-1))); break;
+      default: KeySFX.play(); setUserAnswer(Number(String(userAnswer)+KeyPressed)); break;
     }
   }
 
