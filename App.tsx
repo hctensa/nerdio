@@ -108,9 +108,9 @@ function App(): JSX.Element {
       default: break;
     }
     switch (Difficulty) {
-      case 'Easy': setTimer(0); break;
-      case 'Medium': setTimer(20); break;
-      case 'Hard': setTimer(10); break;
+      case 'Easy': setTimer(0); setCountdownDuration(0); break;
+      case 'Medium': setTimer(20); setCountdownDuration(20); break;
+      case 'Hard': setTimer(10); setCountdownDuration(10); break;
       default: break;
     }
   }
